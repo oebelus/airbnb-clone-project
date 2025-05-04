@@ -6,120 +6,45 @@ The main goal is to understand complex architectures and workflows.
 
 ## Team Roles
 
-### 2. Backend Developer
+**Backend Developer**  
 
-- Designs and implements server-side logic using Django
-- Develops RESTful or GraphQL APIs for frontend consumption
-- Implements authentication and authorization systems
-- Optimizes application performance and scalability
-- Integrates with third-party services (payment gateways, maps, etc.)
+- Builds APIs with Django/DRF  
+- Handles authentication  
+- Integrates payment/maps APIs  
 
-### 4. Database Administrator
+**Database Admin**  
 
-- Designs and implements the MySQL database schema
-- Optimizes database queries for performance
-- Implements data migration strategies
-- Ensures data integrity and security
-- Sets up database backup and recovery procedures
+- Designs PostgreSQL schema  
+- Optimizes queries  
+- Manages migrations  
 
-### 5. DevOps Developer
+**DevOps Engineer**  
 
-- Configures and maintains CI/CD pipelines (GitHub Actions)
-- Manages Docker containers and container orchestration
-- Implements infrastructure as code (IaC)
-- Monitors application performance and uptime
-- Automates deployment processes
+- Sets up CI/CD (GitHub Actions)  
+- Manages Docker containers  
+- Monitors performance  
 
-### 6. QA/Test Developer
+**QA Tester**  
 
-- Develops and executes test plans (unit, integration, E2E)
-- Implements automated testing frameworks
-- Reports and tracks bugs
-- Ensures code quality through linting and static analysis
-- Conducts performance and security testing
-
-### 8. Security Specialist
-
-- Implements security best practices
-- Conducts vulnerability assessments
-- Sets up authentication and encryption systems
-- Ensures compliance with data protection regulations
-- Monitors for and responds to security incidents
-
-### 9. Technical Writer
-
-- Creates comprehensive project documentation
-- Writes API documentation (Swagger/OpenAPI)
-- Maintains user guides and developer manuals
-- Ensures documentation is up-to-date with code changes
-- Creates onboarding materials for new team members
+- Writes automated tests  
+- Checks security vulnerabilities  
+- Ensures code quality  
 
 ## Technology Stack
 
 This project will be using:
 
-### Backend
+**Backend**  
 
-- **Django**  
-  A high-level Python web framework for rapid development and clean design. Used to build the core application logic, handle business rules, and serve RESTful/GraphQL APIs.
+- Django + DRF (REST APIs)  
+- PostgreSQL (database)  
+- Redis (caching)  
 
-- **Django REST Framework (DRF)**  
-  A powerful toolkit built on Django for creating flexible and scalable REST APIs. Enables easy serialization, authentication policies, and viewset routing.
+**Services**  
 
-- **GraphQL**  
-  A query language for APIs that provides clients with exactly the data they request. Used alongside REST for more efficient data fetching in complex components.
-
-### Database
-
-- **PostgreSQL**  
-  A robust, open-source relational database system. Handles structured data for listings, users, bookings, and reviews with ACID compliance and strong data integrity.
-
-- **Redis**  
-  An in-memory data store used for caching frequent queries, session storage, and real-time features like messaging.
-
-### APIs & Integration
-
-- **Stripe API**  
-  Handles secure payment processing for bookings and payouts to hosts.
-
-- **Google Maps API**  
-  Provides location services, maps display, and geocoding for property listings.
-
-- **Twilio/SendGrid**  
-  For SMS notifications and email communications (booking confirmations, alerts, etc.).
-
-### DevOps & Infrastructure
-
-- **Docker**  
-  Containerization platform used to create consistent development environments and simplify deployment.
-
-- **GitHub Actions**  
-  CI/CD service for automating testing and deployment workflows.
-
-- **AWS/GCP**  
-  Cloud platforms for hosting the application (EC2/Compute Engine), storage (S3/Cloud Storage), and other services.
-
-- **Nginx**  
-  A high-performance web server and reverse proxy that handles load balancing and static file serving.
-
-### Testing
-
-- **Pytest**  
-  Python testing framework for writing unit and integration tests.
-
-- **Jest**  
-  JavaScript testing framework for React components and frontend logic.
-
-- **Cypress/Selenium**  
-  For end-to-end testing of user workflows.
-
-### Monitoring
-
-- **Sentry**  
-  For real-time error tracking and performance monitoring.
-
-- **Prometheus + Grafana**  
-  For collecting and visualizing metrics about application performance.
+- Stripe (payments)  
+- Google Maps (locations)  
+- SendGrid (emails)
 
 ## Database Design
 
@@ -237,89 +162,28 @@ The database follows a relational model with these core entities:
 
 ## Feature Breakdown
 
-### 1. User Authentication & Management  
+1. **User Accounts**  
+   - Signup/login  
+   - Host/guest roles  
 
-- Allows users to register, log in, and manage profiles (hosts/guests).  
-- Implements JWT or session-based auth for secure access control.  
-- Enables role-based permissions (e.g., hosts can list properties, guests can book).  
+2. **Property Listings**  
+   - Add/edit listings  
+   - Search/filter  
 
-### 2. Property Listing & Management  
+3. **Bookings**  
+   - Date selection  
+   - Payment processing  
 
-- Hosts can create, update, and delete property listings with details (photos, amenities, pricing).  
-- Supports search filters (location, dates, price range) and sorting for discovery.  
-- Includes geo-location services via Maps API for accurate address handling.  
-
-### 3. Booking System  
-
-- Enables guests to reserve properties with date selection and real-time availability checks.  
-- Calculates dynamic pricing (base rate + cleaning fees) and total costs.  
-- Sends confirmation emails/SMS via Twilio/SendGrid integration.  
-
-### 4. Reviews & Ratings  
-
-- Guests can leave ratings (1-5 stars) and text reviews for stayed properties.  
-- Hosts can respond to reviews, fostering trust in the community.  
-- Aggregates average ratings for properties and displays them publicly.  
-
-### 5. Payment Processing  
-
-- Integrates Stripe/PayPal for secure payment handling with PCI compliance.  
-- Supports refunds and holds security deposits for damages.  
-- Generates receipts and booking invoices automatically.  
-
-### 6. Messaging System  
-
-- Real-time chat between hosts and guests for booking inquiries.  
-- Notifications for new messages, booking requests, and updates.  
-- Archive conversations for dispute resolution reference.  
-
-### 7. Admin Dashboard  
-
-- Provides analytics (bookings, revenue, popular locations).  
-- Moderation tools for listings, users, and reviews.  
-- System health monitoring (server status, error logs).  
-
-### 8. Wishlists & Favorites  
-
-- Guests can save properties to personalized wishlists.  
-- Sends price-drop alerts for saved listings.  
-- Syncs across devices via user accounts.  
+4. **Reviews**  
+   - Ratings system  
+   - Host responses  
 
 ## API Security
 
-### Key Security Measures
-
-1. **Authentication**  
-   - JWT (JSON Web Tokens) with short-lived access tokens and refresh tokens  
-   - Secure password storage using bcrypt hashing  
-   - Implements OAuth 2.0 for third-party logins (Google, Facebook)  
-
-2. **Authorization**  
-   - Role-based access control (RBAC) for endpoints  
-   - Property ownership verification for host actions  
-   - Session management with secure, HttpOnly cookies  
-
-3. **Data Protection**  
-   - TLS/SSL encryption for all API communications  
-   - Sensitive data encryption at rest (PII, payment info)  
-   - Regular security audits and dependency updates  
-
-4. **Request Validation**  
-   - Input sanitization against SQL injection/XSS attacks  
-   - Rate limiting (e.g., 100 requests/minute per IP)  
-   - CORS policy restrictions for cross-origin requests  
-
-5. **Payment Security**  
-   - PCI-DSS compliance via Stripe integration  
-   - Never storing raw payment details in our database  
-   - Webhook signature verification for payment events  
-
-### Why Security Matters
-
-- **User Data**: Prevents breaches of personal information and identity theft  
-- **Payments**: Ensures financial transactions are irreversible and fraud-proof  
-- **Platform Integrity**: Blocks abuse (spam bookings, fake listings)  
-- **Legal Compliance**: Meets GDPR/CCPA requirements for data handling  
+- JWT authentication  
+- Rate limiting  
+- Data encryption  
+- Regular audits  
 
 ## CI/CD Pipeline
 
@@ -350,12 +214,4 @@ Our CI/CD (Continuous Integration/Continuous Deployment) pipeline automates test
    - **Sentry**: Error monitoring in production  
 
 4. **Pipeline Stages**  
-   1. Code Commit → 2. Automated Testing → 3. Build →  
-   4. Staging Deployment → 5. Manual Approval → 6. Production Rollout  
-
-### Benefits  
-
-- Catches ~80% of bugs before production  
-- Enables multiple daily deployments safely  
-- Reduces "works on my machine" issues  
-
+   1. Code Commit → 2. Automated Testing → 3. Build →  4. Staging Deployment → 5. Manual Approval → 6. Production Rollout  
