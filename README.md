@@ -197,21 +197,9 @@ Our CI/CD (Continuous Integration/Continuous Deployment) pipeline automates test
 
 ### Implementation
 
-1. **Continuous Integration**  
-   - GitHub Actions for automated testing on every push  
-   - Runs unit tests, integration tests, and security scans  
-   - Checks code quality with ESLint/SonarQube  
+#### Tools & Services
 
-2. **Continuous Deployment**  
-   - Docker containers for environment consistency  
-   - Staging environment for pre-production testing  
-   - Blue-green deployments to minimize downtime  
-
-3. **Tools & Services**  
-   - **GitHub Actions**: Primary CI/CD orchestration  
-   - **Docker**: Containerization for reproducible builds  
-   - **AWS CodeDeploy**/**Heroku**: Deployment targets  
-   - **Sentry**: Error monitoring in production  
-
-4. **Pipeline Stages**  
-   1. Code Commit → 2. Automated Testing → 3. Build →  4. Staging Deployment → 5. Manual Approval → 6. Production Rollout  
+- **GitHub Actions**: Primary CI/CD orchestration  
+- **Docker**: Containerization for reproducible builds  
+- **AWS CodeDeploy**/**Heroku**: Deployment targets  
+- **Sentry**: Error monitoring in production  
